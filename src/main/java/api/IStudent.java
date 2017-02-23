@@ -12,7 +12,7 @@ public interface IStudent {
      * @param className The name of the class to register for
      * @param year The year in which the class is taught
      */
-    public void registerForClass(String studentName, String className, int year);
+    void registerForClass(String studentName, String className, int year);
 
     /**
      * Drop class {@code className} in year {@code year} for student {@code studentName},
@@ -22,7 +22,7 @@ public interface IStudent {
      * @param className Name of the class to drop
      * @param year Year in which class is taught
      */
-    public void dropClass(String studentName, String className, int year);
+    void dropClass(String studentName, String className, int year);
 
     /**
      * Submit {@code studentName}'s homework solution {@code answerString} for homework {@code homeworkName} of class {@code className},
@@ -34,15 +34,17 @@ public interface IStudent {
      * @param className Name of class
      * @param year Year in which class is taught
      */
-    public void submitHomework(String studentName, String homeworkName, String answerString, String className, int year);
+    void submitHomework(String studentName, String homeworkName, String answerString, String className, int year);
 
+
+    // Getters for testing purposes
     /**
      * @return Whether student {@code studentName} is registered for this class
      */
-    public boolean isRegisteredFor(String studentName, String className, int year);
+    boolean isRegisteredFor(String studentName, String className, int year);
 
     /**
      * @return Whether student {@code studentName} has submitted homework {@code homeworkName} for this class
      */
-    public boolean hasSubmitted(String studentName, String homeworkName, String className, int year);
+    boolean hasSubmitted(String studentName, String homeworkName, String className, int year);
 }

@@ -14,7 +14,7 @@ public interface IAdmin {
      * @param instructorName Name of instructor to be assigned,
      * @param capacity Maximum capacity of this class > 0
      */
-    public void createClass(String className, int year, String instructorName, int capacity);
+    void createClass(String className, int year, String instructorName, int capacity);
 
     /**
      * Adjust the capacity (maximum number of students) of class {@code className} to new capacity {@code capacity}
@@ -23,20 +23,22 @@ public interface IAdmin {
      * @param year Year in which this class is taught
      * @param capacity New capacity of this class, must be at least equal to the number of students enrolled
      */
-    public void changeCapacity(String className, int year, int capacity);
+    void changeCapacity(String className, int year, int capacity);
 
+
+    // Getters for testing purposes
     /**
      * @return Whether class {@code className} exists in year {@code year}
      */
-    public boolean classExists(String className, int year);
+    boolean classExists(String className, int year);
 
     /**
      * @return The name of the instructor for class {@code className} in year {@code year}
      */
-    public String getClassInstructor(String className, int year);
+    String getClassInstructor(String className, int year);
 
     /**
      * @return The capacity (maximum number of enrollees) for class {@code className} in year {@code year}
      */
-    public int getClassCapacity(String className, int year);
+    int getClassCapacity(String className, int year);
 }

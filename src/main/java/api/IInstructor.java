@@ -14,7 +14,7 @@ public interface IInstructor {
      * @param homeworkName Name of the homework assignment to be added
      * @param homeworkDescription Description of homework
      */
-    public void addHomework(String instructorName, String className, int year, String homeworkName, String homeworkDescription);
+    void addHomework(String instructorName, String className, int year, String homeworkName, String homeworkDescription);
 
     /**
      * Assign grade {@code grade} to student {@code studentName} for homework {@code homeworkName} in class {@code className},
@@ -27,15 +27,17 @@ public interface IInstructor {
      * @param studentName Name of student to grade
      * @param grade Percentage grade of student
      */
-    public void assignGrade(String instructorName, String className, int year, String homeworkName, String studentName, int grade);
+    void assignGrade(String instructorName, String className, int year, String homeworkName, String studentName, int grade);
 
+
+    // Getters for testing purposes
     /**
      * @return Whether homework with name {@code homeworkName} exists for this class
      */
-    public boolean homeworkExists(String className, int year, String homeworkName);
+    boolean homeworkExists(String className, int year, String homeworkName);
 
     /**
      * @return The grade for student {@code studentName} on homework {@code homeworkName} for this class, or null if not applicable
      */
-    public Integer getGrade(String className, int year, String homeworkName, String studentName);
+    Integer getGrade(String className, int year, String homeworkName, String studentName);
 }
