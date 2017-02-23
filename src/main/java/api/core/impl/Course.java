@@ -18,6 +18,7 @@ class Course {
         this(name, year, 0);
     }
 
+
     protected Course(String name, int year, int capacity) {
         this.name = name;
         this.year = year;
