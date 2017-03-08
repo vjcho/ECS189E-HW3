@@ -7,9 +7,7 @@ import api.core.impl.Student;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
+import static org.junit.Assert.*;
 
 public class TestStudent {
     private IAdmin admin;
@@ -39,8 +37,16 @@ public class TestStudent {
     }
 
     @Test
+    public void testRegisterClassNoClass() {
+        this.student.registerForClass("stud","Test2",2017);
+        assertFalse(this.student.isRegisteredFor("stud","Test2",2017));
+    }
+
+    @Test
     public void testDropClass() {
         this.student.registerForClass("stud", "Test",2017);
+        assertTrue(this.student.isRegisteredFor("stud","Test",2017));
+
         this.student.dropClass("stud", "Test", 2017);
         assertFalse(this.student.isRegisteredFor("stud", "Test", 2017));
     }
@@ -54,7 +60,7 @@ public class TestStudent {
     }
 
     @Test
-    public void testSubmitHomeworkNotRegistered() {
+    public void testSubmitHomeworkNotRegisteredForClass() {
         this.instructor.addHomework("Instructor", "Test", 2017, "hw", "desc");
         this.student.submitHomework("stud", "hw", "answer", "Test", 2017);
         assertFalse(this.student.hasSubmitted("stud", "hw", "Test", 2017));
@@ -70,7 +76,6 @@ public class TestStudent {
     public void testSubmitHomeworkDiffYear() {
         this.admin.createClass("Test2",2018,"Instructor",1);
         this.instructor.addHomework("Instructor", "Test2", 2018, "hw", "desc");
-
         this.student.registerForClass("stud", "Test2", 2018);
         this.student.submitHomework("stud", "hw", "answer", "Test2", 2018);
         assertFalse(this.student.hasSubmitted("stud", "hw", "Test2", 2018));

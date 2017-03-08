@@ -17,7 +17,6 @@ public class TestInstructor {
     public void setup() {
         this.admin = new Admin();
         this.admin.createClass("Test", 2017, "Instructor", 15);
-
         this.instructor = new Instructor();
     }
 
@@ -28,9 +27,21 @@ public class TestInstructor {
     }
 
     @Test
-    public void testAddHomeworkUnassigned() {
+    public void testAddHomeworkUnassignedInstructor() {
         instructor.addHomework("Instructor2", "Test", 2017, "hw1", "hw desc");
         assertFalse(instructor.homeworkExists("Test", 2017, "hw1"));
+    }
+
+    @Test
+    public void testAddHomeworkClassNotExists() {
+        instructor.addHomework("Instructor", "Test2", 2017, "hw1", "hw desc");
+        assertFalse(instructor.homeworkExists("Test2",2017,"hw1"));
+    }
+
+    @Test
+    public void testAddHomeworkWrongYear() {
+        instructor.addHomework("Instructor", "Test", 2016, "hw1", "hw desc");
+        assertFalse(instructor.homeworkExists("Test",2016,"hw1"));
     }
 
     @Test
@@ -45,13 +56,39 @@ public class TestInstructor {
     }
 
     @Test
-    public void testAssignGradeNoStudent() {
+    public void testAssignGradeNoStudentSubmission() {
         IStudent student = new Student();
         student.registerForClass("stud","Test",2017);
-
         instructor.addHomework("Instructor","Test",2017,"hw1","hw desc");
         instructor.assignGrade("Instructor","Test",2017,"hw1","stud",1);
 
-        assertEquals(new Integer(1), instructor.getGrade("Test",2017,"hw1","stud"));
+        assertNull(instructor.getGrade("Test",2017,"hw1","stud"));
+    }
+
+    @Test
+    public void testAssignGradeNonexistentStudent() {
+        instructor.addHomework("Instructor","Test",2017,"hw1","hw desc");
+        instructor.assignGrade("Instructor","Test",2017,"hw1","stud",1);
+
+        assertNull(instructor.getGrade("Test",2017,"hw1","stud"));
+    }
+
+    @Test
+    public void testAssignGradeNoHomework() {
+        IStudent student = new Student();
+        student.registerForClass("stud","Test",2017);
+        instructor.assignGrade("Instructor","Test",2017,"hw1","stud",1);
+        assertNull(instructor.getGrade("Test",2017,"hw1","stud"));
+    }
+
+    @Test
+    public void testAssignGradeUnassignedInstructor() {
+        IStudent student = new Student();
+        student.registerForClass("stud","Test",2017);
+        instructor.addHomework("Instructor2","Test",2017,"hw1","hw desc");
+        student.submitHomework("stud","hw1","answer","Test",2017);
+        instructor.assignGrade("Instructor2","Test",2017,"hw1","stud",1);
+
+        assertNull(instructor.getGrade("Test", 2017,"hw1","stud"));
     }
 }
