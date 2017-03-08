@@ -21,31 +21,31 @@ public class TestInstructor {
     }
 
     @Test
-    public void testAddHomework() {
+    public void testAddHomework() { // test that addHomework() works
         instructor.addHomework("Instructor","Test",2017,"hw1","hw desc");
         assertTrue(instructor.homeworkExists("Test", 2017, "hw1"));
     }
 
     @Test
-    public void testAddHomeworkUnassignedInstructor() {
+    public void testAddHomeworkUnassignedInstructor() { // should not be able to add homework if not assigned to class
         instructor.addHomework("Instructor2", "Test", 2017, "hw1", "hw desc");
         assertFalse(instructor.homeworkExists("Test", 2017, "hw1"));
     }
 
     @Test
-    public void testAddHomeworkClassNotExists() {
+    public void testAddHomeworkClassNotExists() { // should not be able to add homework to a class that doesn't exist
         instructor.addHomework("Instructor", "Test2", 2017, "hw1", "hw desc");
         assertFalse(instructor.homeworkExists("Test2",2017,"hw1"));
     }
 
     @Test
-    public void testAddHomeworkWrongYear() {
+    public void testAddHomeworkWrongYear() { // should not be able to add homework to a class in the past
         instructor.addHomework("Instructor", "Test", 2016, "hw1", "hw desc");
         assertFalse(instructor.homeworkExists("Test",2016,"hw1"));
     }
 
     @Test
-    public void testAssignGrade() {
+    public void testAssignGrade() { // test that assignGrade() works
         IStudent student = new Student();
         student.registerForClass("stud","Test",2017);
         instructor.addHomework("Instructor","Test",2017,"hw1","hw desc");
@@ -56,7 +56,7 @@ public class TestInstructor {
     }
 
     @Test
-    public void testAssignGradeNoStudentSubmission() {
+    public void testAssignGradeNoStudentSubmission() { // should not be able to assign grade to a student who did not submit homework
         IStudent student = new Student();
         student.registerForClass("stud","Test",2017);
         instructor.addHomework("Instructor","Test",2017,"hw1","hw desc");
@@ -66,7 +66,7 @@ public class TestInstructor {
     }
 
     @Test
-    public void testAssignGradeNonexistentStudent() {
+    public void testAssignGradeNonexistentStudent() { // should not be able to assign grade to a student that doesn't exist
         instructor.addHomework("Instructor","Test",2017,"hw1","hw desc");
         instructor.assignGrade("Instructor","Test",2017,"hw1","stud",1);
 
@@ -74,7 +74,7 @@ public class TestInstructor {
     }
 
     @Test
-    public void testAssignGradeNoHomework() {
+    public void testAssignGradeNoHomework() { // should not be able to assign grade if student didn't submit homework
         IStudent student = new Student();
         student.registerForClass("stud","Test",2017);
         instructor.assignGrade("Instructor","Test",2017,"hw1","stud",1);
@@ -82,7 +82,7 @@ public class TestInstructor {
     }
 
     @Test
-    public void testAssignGradeUnassignedInstructor() {
+    public void testAssignGradeUnassignedInstructor() { // should not be able to assign grade if instructor is not assigned to the class
         IStudent student = new Student();
         student.registerForClass("stud","Test",2017);
         instructor.addHomework("Instructor2","Test",2017,"hw1","hw desc");

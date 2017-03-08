@@ -23,13 +23,13 @@ public class TestStudent {
     }
 
     @Test
-    public void testRegisterForClass() {
+    public void testRegisterForClass() { // test that registerForClass() works
         this.student.registerForClass("stud","Test",2017);
         assertTrue(this.student.isRegisteredFor("stud","Test",2017));
     }
 
     @Test
-    public void testRegisterClassFullCapacity() {
+    public void testRegisterClassFullCapacity() { // student should not be able to register for class if class is full
         IStudent student2 = new Student();
         this.student.registerForClass("stud1", "Test", 2017);
         student2.registerForClass("stud2", "Test", 2017);
@@ -37,13 +37,13 @@ public class TestStudent {
     }
 
     @Test
-    public void testRegisterClassNoClass() {
+    public void testRegisterClassNoClass() { // should not be able to register for a class that doesn't exist
         this.student.registerForClass("stud","Test2",2017);
         assertFalse(this.student.isRegisteredFor("stud","Test2",2017));
     }
 
     @Test
-    public void testDropClass() {
+    public void testDropClass() { // test that dropClass() works
         this.student.registerForClass("stud", "Test",2017);
         assertTrue(this.student.isRegisteredFor("stud","Test",2017));
 
@@ -52,7 +52,7 @@ public class TestStudent {
     }
 
     @Test
-    public void testSubmitHomework() {
+    public void testSubmitHomework() { // test that submitHomework() works
         this.student.registerForClass("stud", "Test", 2017);
         this.instructor.addHomework("Instructor", "Test", 2017, "hw", "desc");
         this.student.submitHomework("stud", "hw", "answer", "Test", 2017);
@@ -60,20 +60,20 @@ public class TestStudent {
     }
 
     @Test
-    public void testSubmitHomeworkNotRegisteredForClass() {
+    public void testSubmitHomeworkNotRegisteredForClass() { // should not be able to submit homework if not registered for class
         this.instructor.addHomework("Instructor", "Test", 2017, "hw", "desc");
         this.student.submitHomework("stud", "hw", "answer", "Test", 2017);
         assertFalse(this.student.hasSubmitted("stud", "hw", "Test", 2017));
     }
 
     @Test
-    public void testSubmitHomeworkNotAssigned() {
+    public void testSubmitHomeworkNotAssigned() { // should not be able to submit homework that wasn't assigned
         this.student.submitHomework("stud", "hw", "answer", "Test", 2017);
         assertFalse(this.student.hasSubmitted("stud", "hw", "Test", 2017));
     }
 
     @Test
-    public void testSubmitHomeworkDiffYear() {
+    public void testSubmitHomeworkDiffYear() { // should not be able to submit homework to a class in a different year
         this.admin.createClass("Test2",2018,"Instructor",1);
         this.instructor.addHomework("Instructor", "Test2", 2018, "hw", "desc");
         this.student.registerForClass("stud", "Test2", 2018);
